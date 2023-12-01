@@ -81,18 +81,17 @@ typedef struct BuiltinCommand
 	int (*func)(CommandInfo_t *);
 } BuiltinCommandTable_t;
 
-int string_length(char *);
-int compare_strings(char *, char *);
-char *starts_with_prefix(const char *, const char *);
-char *concatenate_strings(char *, char *);
-char *copy_string(char *, char *);
-char *duplicate_string(const char *);
-void print_string(char *);
-int print_character(char);
-char *copy_n_string(char *, char *, int);
-char *concatenate_n_string(char *, char *, int);
-char *find_character(char *, char);
-char **split_string(char *, char *);
-char **split_string2(char *, char);
+/* StringFunctions */
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
+char *_strcat(char *dest, char *src);
+char *starts_with_prefix(const char *haystack, const char *needle);
+char *_strcpy(char *dest, char *src);
+char *_strdup(char *str);
+void _puts(char *str);
+int _putchar(char c);
+char *_strncpy(char *dest, char *src, int n);
+char *_strncat(char *dest, char *src, int n);
+char *_strchr(char *s, char c);
 
 #endif /* MAIN_H */
