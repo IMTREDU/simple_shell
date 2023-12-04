@@ -12,8 +12,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-#define READ_BUF_SIZE 1024
-#define WRITE_BUF_SIZE 1024
+extern char **environ;
 
 /**
  * struct ListNode - Represents a node in a singly linked list
@@ -93,5 +92,31 @@ int _putchar(char c);
 char *_strncpy(char *dest, char *src, int n);
 char *_strncat(char *dest, char *src, int n);
 char *_strchr(char *s, char c);
+char **splitStr(char *s, char *d);
+char **splitStr2(char *s, char *d);
+
+/* ErrorStringFunctions */
+
+void customPrintString(char *inputStr);
+int customPrintCharToStderr(char character);
+int writeToFD(char character, int fileDescriptor);
+int printStringToFD(char *inputStr, int fileDescriptor);
+
+/* MemoryFunctions */
+char *_memset(char *s, char b, unsigned int n);
+void *reallocMemory(void *ptr, unsigned int oldSize, unsigned int newSize);
+void freeStringArray(char **stringArray);
+int freeAndNullify(void **pointer);
+
+/* shell_operations.c */
+int runShell(CommandInfo_t *, char **);
+int findBuiltInCommand(CommandInfo_t *);
+void findCommandInPath(CommandInfo_t *);
+void executeCommand(CommandInfo_t *);
+
+/* path_operations.c */
+int isCommandInPath(CommandInfo_t *, char *);
+char *duplicateSubstring(char *, int, int);
+char *findExecutablePath(CommandInfo_t *, char *, char *);
 
 #endif /* MAIN_H */
