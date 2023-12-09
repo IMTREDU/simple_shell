@@ -29,45 +29,45 @@ typedef struct Node
 
 /**
  * struct CommandInfo - Represents information related to a command execution
- * @argument: The main argument for the command
- * @arguments_array: Array of arguments for the command
- * @executable_path: Path to the executable for the command
- * @argument_count: Number of arguments in the command
- * @line_number: Line number associated with the command
- * @error_number: Error code for exit() calls
- * @line_count_flag: Flag to indicate whether to count this line of input
- * @filename: The program filename
- * @environment_variables: Custom modified copy of the environment variables
- * @environment_changed: Flag indicating if the environment was changed
- * @execution_status: The return status of the last executed command
- * @command_buffer: Pointer to a chain buffer for storing commands (memory management)
- * @command_buffer_type: Type of command in the buffer (CMD_type ||, &&, ;)
- * @file_descriptor: File descriptor from which to read line input
- * @history_count: Count of the history line number
- * @environment: Linked list representing the local copy of the environment (environ)
- * @command_alias: Linked list representing command aliases
- * @command_history: Linked list representing the history of executed commands
+ * @arg: The main argument for the command
+ * @argv: Array of arguments for the command
+ * @path: Path to the executable for the command
+ * @argc: Number of arguments in the command
+ * @line_count: Line number associated with the command
+ * @err_num: Error code for exit() calls
+ * @linecount_flag: Flag to indicate whether to count this line of input
+ * @fname: The program filename
+ * @environ: Custom modified copy of the environment variables
+ * @env_changed: Flag indicating if the environment was changed
+ * @status: The return status of the last executed command
+ * @cmd_buf: Pointer to a chain buffer for storing commands (memory management)
+ * @cmd_buf_type: Type of command in the buffer (CMD_type ||, &&, ;)
+ * @readfd: File descriptor from which to read line input
+ * @histcount: Count of the history line number
+ * @env: Linked list representing the local copy of the environment (environ)
+ * @alias: Linked list representing command aliases
+ * @history: Linked list representing the history of executed commands
  */
 typedef struct CommandInfo
 {
-	char *argument;
-	char **arguments_array;
-	char *executable_path;
-	int argument_count;
-	unsigned int line_number;
-	int error_number;
-	int line_count_flag;
-	char *filename;
-	char **environment_variables;
-	int environment_changed;
-	int execution_status;
-	char **command_buffer;
-	int command_buffer_type;
-	int file_descriptor;
-	int history_count;
-	ListNode_t *environment;
-	ListNode_t *command_alias;
-	ListNode_t *command_history;
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	char **environ;
+	int env_changed;
+	int status;
+	char **cmd_buf;
+	int cmd_buf_type;
+	int readfd;
+	int histcount;
+	ListNode_t *env;
+	ListNode_t *alias;
+	ListNode_t *history;
 } CommandInfo_t;
 
 /**
