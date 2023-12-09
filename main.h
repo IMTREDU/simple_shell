@@ -116,9 +116,9 @@ void findCommandInPath(CommandInfo_t *);
 void executeCommand(CommandInfo_t *);
 
 /* path_operations.c */
-int isCommandInPath(CommandInfo_t *, char *);
-char *duplicateSubstring(char *, int, int);
-char *findExecutablePath(CommandInfo_t *, char *, char *);
+int isExecutableCommand(Commandinfo_t *info, char *path);
+char *duplicateCharsInRange(char *pathstr, int start, int stop);
+char *findCmdInPath(Commandinfo_t *info, char *pathstr, char *cmd)
 
 /* ShellCommand.c */
 int executeShellCommand(Commandinfo_t *info, char **av);
@@ -136,5 +136,7 @@ void _print_error(Commandinfo_t *info, char *estr);
 int _print_d(int input, int fd);
 char *_convert_number(long int num, int base, int flags);
 void _remove_comments(char *buf);
+
+
 
 #endif /* MAIN_H */
