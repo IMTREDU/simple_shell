@@ -68,7 +68,7 @@ typedef struct CommandInfo
 	ListNode_t *env;
 	ListNode_t *alias;
 	ListNode_t *history;
-} CommandInfo_t;
+} Commandinfo_t;
 
 /**
  * struct BuiltinCommand - Represents a built-in command with its related function
@@ -78,7 +78,7 @@ typedef struct CommandInfo
 typedef struct BuiltinCommand
 {
 	char *type;
-	int (*func)(CommandInfo_t *);
+	int (*func)(Commandinfo_t *);
 } BuiltinCommandTable_t;
 
 /* StringFunctions */
@@ -108,12 +108,6 @@ char *_memset(char *s, char b, unsigned int n);
 void *reallocMemory(void *ptr, unsigned int oldSize, unsigned int newSize);
 void freeStringArray(char **stringArray);
 int freeAndNullify(void **pointer);
-
-/* shell_operations.c */
-int runShell(CommandInfo_t *, char **);
-int findBuiltInCommand(CommandInfo_t *);
-void findCommandInPath(CommandInfo_t *);
-void executeCommand(CommandInfo_t *);
 
 /* path_operations.c */
 int isExecutableCommand(Commandinfo_t *info, char *path);
@@ -156,7 +150,7 @@ int setEnvVar(Commandinfo_t *info);
 int unsetEnvVar(Commandinfo_t *info);
 int populateEnvList(Commandinfo_t *info);
 char **copyEnv(Commandinfo_t *info);
-int unsetEnvVar(Commandinfo_t *info, char *var);
-int setEnvVar(Commandinfo_t *info, char *var, char *value);
+int unsetEnvVar2(Commandinfo_t *info, char *var);
+int setEnvVar2(Commandinfo_t *info, char *var, char *value);
 
 #endif /* MAIN_H */

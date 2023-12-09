@@ -17,12 +17,12 @@ char **copyEnv(Commandinfo_t *info)
 }
 
 /**
- * unsetEnvVar - Removes an environment variable.
+ * unsetEnvVar2 - Removes an environment variable.
  * @info: Structure with arguments, maintaining a constant prototype.
  * @var: String representing the variable to be removed.
  * Return: 1 on success, 0 otherwise.
  */
-int unsetEnvVar(Commandinfo_t *info, char *var)
+int unsetEnvVar2(Commandinfo_t *info, char *var)
 {
 	ListNode_t *node = info->env;
 	size_t i = 0;
@@ -48,13 +48,13 @@ int unsetEnvVar(Commandinfo_t *info, char *var)
 }
 
 /**
- * setEnvVar - Initializes or modifies an environment variable.
+ * setEnvVar2 - Initializes or modifies an environment variable.
  * @info: Structure with arguments, maintaining a constant prototype.
  * @var: String representing the variable property.
  * @value: String representing the variable value.
  * Return: Always 0.
  */
-int setEnvVar(Commandinfo_t *info, char *var, char *value)
+int setEnvVar2(Commandinfo_t *info, char *var, char *value)
 {
 	char *buf = NULL;
 	ListNode_t *node;

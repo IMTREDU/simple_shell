@@ -12,7 +12,7 @@ void customPrintString(char *inputStr)
 
 	if (!inputStr)
 	{
-		return ();
+		return;
 	}
 	while (inputStr[index] != '\0')
 	{
