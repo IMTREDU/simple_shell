@@ -7,11 +7,11 @@
  *
  * Return: 1 if true, 0 otherwise
  */
-int isCommandInPath(CommandInfo_t *cmdInfo, char *path)
+int isCommandInPath(CommandInfo_t *info, char *path)
 {
 	struct stat st;
 
-	(void)cmdInfo;
+	(void)info;
 	if (!path || stat(path, &st))
 	{
 		return (0);

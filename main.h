@@ -126,4 +126,15 @@ void searchBuiltins(Commandinfo_t *info);
 void searchCommand(Commandinfo_t *info);
 void forkAndExecute(Commandinfo_t *info);
 
+/* interactive_operations.c and error_handling.c */
+int exeInteractiveOperation(Commandinfo_t *info);
+int is_delim(char c, char *delim);
+int _isalpha(int c);
+int _atoi(char *s);
+int _safe_atoi(char *s);
+void _print_error(Commandinfo_t *info, char *estr);
+int _print_d(int input, int fd);
+char *_convert_number(long int num, int base, int flags);
+void _remove_comments(char *buf);
+
 #endif /* MAIN_H */
