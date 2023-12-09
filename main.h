@@ -149,4 +149,14 @@ void initializeInfo(Commandinfo_t *info);
 void configureInfo(Commandinfo_t *info, char **av);
 void releaseInfo(Commandinfo_t *info, int all);
 
+/* env_operations.c */
+int printCurrentEnv(Commandinfo_t *info);
+char *getEnvVar(Commandinfo_t *info, const char *name);
+int setEnvVar(Commandinfo_t *info);
+int unsetEnvVar(Commandinfo_t *info);
+int populateEnvList(Commandinfo_t *info);
+char **copyEnv(Commandinfo_t *info);
+int unsetEnvVar(Commandinfo_t *info, char *var);
+int setEnvVar(Commandinfo_t *info, char *var, char *value);
+
 #endif /* MAIN_H */
