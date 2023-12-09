@@ -15,15 +15,16 @@
 extern char **environ;
 
 /**
- * struct ListNode - Represents a node in a singly linked list
- * @data: The numerical data field of the node
- * @text: A string associated with the node
+ * struct Node - Represents a node in a singly linked list
+ * @num: The numerical data field of the node
+ * @str: A string associated with the node
+ * @next: Pointer points to the next Node
  */
 typedef struct Node
 {
-	int data;
-	char *text;
-	struct Node *nextNode;
+	int num;
+	char *str;
+	struct Node *next;
 } ListNode_t;
 
 /**
