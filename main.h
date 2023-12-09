@@ -118,7 +118,7 @@ void executeCommand(CommandInfo_t *);
 /* path_operations.c */
 int isExecutableCommand(Commandinfo_t *info, char *path);
 char *duplicateCharsInRange(char *pathstr, int start, int stop);
-char *findCmdInPath(Commandinfo_t *info, char *pathstr, char *cmd)
+char *findCmdInPath(Commandinfo_t *info, char *pathstr, char *cmd);
 
 /* ShellCommand.c */
 int executeShellCommand(Commandinfo_t *info, char **av);
@@ -137,6 +137,16 @@ int _print_d(int input, int fd);
 char *_convert_number(long int num, int base, int flags);
 void _remove_comments(char *buf);
 
+/* input_operations.c */
+ssize_t input_buf(Commandinfo_t *info, char **buf, size_t *len);
+ssize_t getInputLine(Commandinfo_t *info);
+ssize_t readBuffer(Commandinfo_t *info, char *buf, size_t *i);
+int getNextLine(Commandinfo_t *info, char **ptr, size_t *length);
+void sigintHandler(__attribute__((unused))int sig_num);
 
+/* info_operations.c */
+void initializeInfo(Commandinfo_t *info);
+void configureInfo(Commandinfo_t *info, char **av);
+void releaseInfo(Commandinfo_t *info, int all);
 
 #endif /* MAIN_H */
