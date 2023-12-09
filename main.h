@@ -120,4 +120,10 @@ int isCommandInPath(CommandInfo_t *, char *);
 char *duplicateSubstring(char *, int, int);
 char *findExecutablePath(CommandInfo_t *, char *, char *);
 
+/* ShellCommand.c */
+int executeShellCommand(Commandinfo_t *info, char **av);
+void searchBuiltins(Commandinfo_t *info);
+void searchCommand(Commandinfo_t *info);
+void forkAndExecute(Commandinfo_t *info);
+
 #endif /* MAIN_H */

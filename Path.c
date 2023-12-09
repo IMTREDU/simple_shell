@@ -26,10 +26,10 @@ int isCommandInPath(CommandInfo_t *cmdInfo, char *path)
 /**
  * duplicateSubstring - duplicates characters in a substring
  * @inputStr: the input string
- *  @startIdx: starting index of the substring
- *  @endIdx: ending index of the substring
+ * @startIdx: starting index of the substring
+ * @endIdx: ending index of the substring
  *
- *  Return: pointer to the new buffer
+ * Return: pointer to the new buffer
  */
 char *duplicateSubstring(char *inputStr, int startIdx, int endIdx)
 {
@@ -48,52 +48,42 @@ char *duplicateSubstring(char *inputStr, int startIdx, int endIdx)
 }
 
 /**
- * findExecutablePath - finds the specified command in the PATH string
- * @cmdInfo: the command information struct
- * @pathStr: the PATH string
+ * findExecutablePath - finds the specified command in path
+ * @info: the command information struct
+ * @pathStr: the string path
  * @cmd: the command to find
  *
  * Return: full path of the command if found, or NULL
  */
-char *findExecutablePath(CommandInfo_t *cmdInfo, char *pathStr, char *cmd)
+char *findExecutablePath(Commandinfo_t *info, char *pathstr, char *cmd)
 {
-	int i = 0, currPos = 0;
+	int i = 0, curr_pos = 0;
 	char *path;
 
-	if (!pathStr)
-	{
+	if (!pathstr)
 		return (NULL);
-	}
 	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
 	{
-		if (isCommandInPath(cmdInfo, cmd))
-		{
+		if (is_cmd(info, cmd))
 			return (cmd);
-		}
 	}
 	while (1)
 	{
-		if (!pathStr[i] || pathStr[i] == ':')
+		if (!pathstr[i] || pathstr[i] == ':')
 		{
-			path = duplicateSubstring(pathStr, currPos, i);
+			path = dup_chars(pathstr, curr_pos, i);
 			if (!*path)
-			{
 				_strcat(path, cmd);
-			}
 			else
 			{
 				_strcat(path, "/");
 				_strcat(path, cmd);
 			}
-			if (isCommandInPath(cmdInfo, path))
-			{
+			if (is_cmd(info, path))
 				return (path);
-			}
-			if (!pathStr[i])
-			{
+			if (!pathstr[i])
 				break;
-			}
-			currPos = i;
+			curr_pos = i;
 		}
 		i++;
 	}
