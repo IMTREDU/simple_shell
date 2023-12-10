@@ -1,5 +1,5 @@
 #include "main.h"
-#define HistoryFile ".simple_shell_history"
+#define HistoryFile ".shell_history"
 
 /**
  * get_history_file - Retrieves the path of the history file
