@@ -121,15 +121,15 @@ void find_cmd(Commandinfo_t *info);
 void fork_cmd(Commandinfo_t *info);
 
 /* interactive_operations.c and error_handling.c */
-int exeInteractiveOperation(Commandinfo_t *info);
+int interactive(Commandinfo_t *info);
 int is_delim(char c, char *delim);
 int _isalpha(int c);
-int _atoi(char *s);
-int _safe_atoi(char *s);
-void _print_error(Commandinfo_t *info, char *estr);
-int _print_d(int input, int fd);
-char *_convert_number(long int num, int base, int flags);
-void _remove_comments(char *buf);
+int _atoi(char * s);
+int _erratoi(char *s);
+void print_error(Commandinfo_t *, char *estr);
+int print_d(int input, int fd);
+char *convert_number(long int num, int base, int flags);
+void remove_comments(char *buf);
 
 /* input_operations.c */
 ssize_t input_buf(Commandinfo_t *info, char **buf, size_t *len);
