@@ -34,6 +34,11 @@ void set_info(Commandinfo_t *info, char **av)
 				info->argv[0] = _strdup(info->arg);
 				info->argv[1] = NULL;
 			}
+			else
+			{
+				fprintf(stderr, "Memory allocation error\n");
+				exit(EXIT_FAILURE);
+			}
 		}
 		for (i = 0; info->argv && info->argv[i]; i++)
 			;
