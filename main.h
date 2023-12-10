@@ -131,26 +131,38 @@ int print_d(int input, int fd);
 char *convert_number(long int num, int base, int flags);
 void remove_comments(char *buf);
 
+/* builtin_operations.c */
+int _myexit(Commandinfo_t *info);
+int _mycd(Commandinfo_t *info);
+int _myhelp(Commandinfo_t *info);
+int _myhistory(Commandinfo_t *info);
+int unset_alias(Commandinfo_t *info, char *str);
+int set_alias(Commandinfo_t *info, char *str);
+int print_alias(Commandlist_t *node);
+int _myalias(Commandinfo_t *info);
+
 /* input_operations.c */
 ssize_t input_buf(Commandinfo_t *info, char **buf, size_t *len);
-ssize_t getInputLine(Commandinfo_t *info);
-ssize_t readBuffer(Commandinfo_t *info, char *buf, size_t *i);
-int getNextLine(Commandinfo_t *info, char **ptr, size_t *length);
+ssize_t get_input(Commandinfo_t *info);
+ssize_t read_buf(Commandinfo_t *info, char *buf, size_t *i);
+int _getline(Commandinfo_t *info, char **ptr, size_t *length);
 void sigintHandler(__attribute__((unused))int sig_num);
 
 /* info_operations.c */
-void initializeInfo(Commandinfo_t *info);
-void configureInfo(Commandinfo_t *info, char **av);
-void releaseInfo(Commandinfo_t *info, int all);
+void clear_info(Commandinfo_t *info);
+void set_info(Commandinfo_t *info, char **av);
+void free_info(Commandinfo_t *info, int all);
 
 /* env_operations.c */
-int printCurrentEnv(Commandinfo_t *info);
-char *getEnvVar(Commandinfo_t *info, const char *name);
-int setEnvVar(Commandinfo_t *info);
-int unsetEnvVar(Commandinfo_t *info);
-int populateEnvList(Commandinfo_t *info);
-char **copyEnv(Commandinfo_t *info);
-int unsetEnvVar2(Commandinfo_t *info, char *var);
-int setEnvVar2(Commandinfo_t *info, char *var, char *value);
+int _myenv(Commandinfo_t *info);
+char *_getenv(Commandinfo_t *info, const char *name);
+int _mysetenv(Commandinfo_t *info);
+int _myunsetenv(Commandinfo_t *info);
+int populate_env_list(Commandinfo_t *info);
+char **get_environ(Commandinfo_t *info);
+int _unsetenv(Commandinfo_t *info, char *var);
+int _setenv(Commandinfo_t *info, char *var, char *value);
+
+
 
 #endif /* MAIN_H */
