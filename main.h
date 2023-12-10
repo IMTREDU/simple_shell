@@ -112,7 +112,7 @@ int bfree(void **ptr)
 /* path_operations.c */
 int is_cmd(Commandinfo_t *info, char *path);
 char *dup_chars(char *pathstr, int start, int stop);
-char *find_path(info_t *info, char *pathstr, char *cmd);
+char *find_path(Commandinfo_t *info, char *pathstr, char *cmd);
 
 /* ShellCommand.c or hsh.c */
 int hsh(Commandinfo_t *info, char **av)
