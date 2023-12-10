@@ -63,7 +63,7 @@ int set_alias(Commandinfo_t *info, char *str)
  *
  * Return: Always returns 0 on success, 1 on error.
  */
-int print_alias(Commandlist_t *node)
+int print_alias(ListNode_t *node)
 {
 	char *p = NULL, *a = NULL;
 
@@ -90,7 +90,7 @@ int _myalias(Commandinfo_t *info)
 {
 	int i = 0;
 	char *p = NULL;
-	list_t *node = NULL;
+	ListNode_t *node = NULL;
 
 	if (info->argc == 1)
 	{
