@@ -86,8 +86,9 @@ int _mycd(Commandinfo_t *info)
  */
 int _myhelp(Commandinfo_t *info)
 {
-	(void)info;
+	char **arg_array;
 
+	arg_array = info->argv;
 	_puts("The 'help' command is not yet implemented.\n");
 
 	if (0)

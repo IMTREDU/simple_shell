@@ -87,14 +87,14 @@ int _strcmp(char *s1, char *s2);
 char *_strcat(char *dest, char *src);
 char *starts_with(const char *haystack, const char *needle);
 char *_strcpy(char *dest, char *src);
-char *_strdup(char *str);
+char *_strdup(const char *str);
 void _puts(char *str);
 int _putchar(char c);
 char *_strncpy(char *dest, char *src, int n);
 char *_strncat(char *dest, char *src, int n);
 char *_strchr(char *s, char c);
 char **strtow(char *str, char *d);
-char **strtow2(char *str, char *d);
+char **strtow2(char *str, char d);
 
 /* ErrorStringFunctions */
 
@@ -138,7 +138,7 @@ int _myhelp(Commandinfo_t *info);
 int _myhistory(Commandinfo_t *info);
 int unset_alias(Commandinfo_t *info, char *str);
 int set_alias(Commandinfo_t *info, char *str);
-int print_alias(Commandlist_t *node);
+int print_alias(ListNode_t *node);
 int _myalias(Commandinfo_t *info);
 
 /* input_operations.c */
