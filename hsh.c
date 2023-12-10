@@ -55,7 +55,7 @@ int hsh(Commandinfo_t *info, char **av)
 int find_builtin(Commandinfo_t *info)
 {
 	int i, built_in_ret = -1;
-	builtin_table builtintbl[] = {
+	BuiltinCommandTable_t builtintbl[] = {
 		{"exit", _myexit},
 		{"env", _myenv},
 		{"help", _myhelp},
