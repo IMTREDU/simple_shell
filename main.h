@@ -107,7 +107,7 @@ int _putsfd(char *str, int fd);
 char *_memset(char *s, char b, unsigned int n);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void ffree(char **pp);
-int bfree(void **ptr)
+int bfree(void **ptr);
 
 /* path_operations.c */
 int is_cmd(Commandinfo_t *info, char *path);
@@ -115,10 +115,10 @@ char *dup_chars(char *pathstr, int start, int stop);
 char *find_path(Commandinfo_t *info, char *pathstr, char *cmd);
 
 /* ShellCommand.c or hsh.c */
-int hsh(Commandinfo_t *info, char **av)
-int find_builtin(Commandinfo_t *info)
-void find_cmd(Commandinfo_t *info)
-void fork_cmd(Commandinfo_t *info)
+int hsh(Commandinfo_t *info, char **av);
+int find_builtin(Commandinfo_t *info);
+void find_cmd(Commandinfo_t *info);
+void fork_cmd(Commandinfo_t *info);
 
 /* interactive_operations.c and error_handling.c */
 int exeInteractiveOperation(Commandinfo_t *info);
