@@ -9,63 +9,67 @@
  */
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i;
+	int i, j;
+	char *s = dest;
 
-	for (i = 0; i < n && src[i] != '\0'; i++)
+	i = 0;
+	while (src[i] != '\0' && i < n - 1)
 	{
 		dest[i] = src[i];
+		i++;
 	}
-	while (i < n)
+	if (i < n)
 	{
-		dest[i++] = '\0';
+		j = i;
+		while (j < n)
+		{
+			dest[j] = '\0';
+			j++;
+		}
 	}
-	return (dest);
+	return (s);
 }
+
 
 /**
  * _strncat - It is a function
  * @dest: Variable from main
  * @src: Variable from main
  * @n: Variable from main
- * Return: Return dest
+ * Return: Return s
  */
 char *_strncat(char *dest, char *src, int n)
 {
 	int i, j;
+	char *s = dest;
 
-	for (i = 0; dest[i] != '\0'; i++)
+	i = 0;
+	j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0' && j < n)
 	{
-
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
-
-	for (j = 0; src[j] != '\0' && j < n; j++)
-	{
-		dest[i + j] = src[j];
-	}
-	dest[i + j] = '\0';
-
-	return (dest);
+	if (j < n)
+		dest[i] = '\0';
+	return (s);
 }
 
 /**
- * *_strchr - It is a function
- * @s: Variable from main
- * @c: Variable from main
- * Return: Return S/Null
+ **_strchr - It is a function
+ *@s: Variable from main
+ *@c: Variable from main
+ *Return: Return S/Null
  */
 char *_strchr(char *s, char c)
 {
-	while (*s != '\0')
-	{
+	do {
 		if (*s == c)
-		{
 			return (s);
-		}
-		s++;
-	}
-	if (*s == c)
-	{
-		return (s);
-	}
+	} while (*s++ != '\0');
+
 	return (NULL);
 }

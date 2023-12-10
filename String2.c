@@ -4,76 +4,72 @@
  * _strcpy - It is a function
  * @dest: Variable from main
  * @src: Variable from main
- * Return: Return char
+ *
+ * Return: Return dest
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i;
+	int i = 0;
 
-	for (i = 0; src[i] != '\0'; i++)
+	if (dest == src || src == 0)
+		return (dest);
+	while (src[i])
 	{
 		dest[i] = src[i];
+		i++;
 	}
-	dest[i] = '\0';
+	dest[i] = 0;
 	return (dest);
 }
 
 /**
  * _strdup - It is a function
  * @str: Variable from main
+ *
  * Return: Return deplicate
  */
-char *_strdup(char *str)
+char *_strdup(const char *str)
 {
-	int len, i;
-	char *dup;
+	int length = 0;
+	char *ret;
 
 	if (str == NULL)
-	{
 		return (NULL);
-	}
-
-	len = 0;
-	while (str[len] != '\0')
-	{
-		len++;
-	}
-
-	dup = malloc((len + 1) * sizeof(char));
-
-	if (dup == NULL)
-	{
+	while (*str++)
+		length++;
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
 		return (NULL);
-	}
-
-	for (i = 0; i <= len; i++)
-	{
-		dup[i] = str[i];
-	}
-
-	return (dup);
+	for (length++; length--;)
+		ret[length] = *--str;
+	return (ret);
 }
 
 /**
- * _puts - It is a function
- * @str: Variable from main
- * Return: Return Void
+ *_puts - It is a function
+ *@str: Variable from main
+ *
+ * Return: Void
  */
 void _puts(char *str)
 {
-	while (*str != '\0')
+	int i = 0;
+
+	if (!str)
+		return;
+	while (str[i] != '\0')
 	{
-		putchar(*str);
-		str++;
+		_putchar(str[i]);
+		i++;
 	}
-	putchar('\n');
 }
 
 /**
  * _putchar - prints the character 'c' to the standard output (stdout)
  * @c: The character to be printed
  *
- * Return: On success 1
+ * Return: On success 1.
+ *
  */
 int _putchar(char c)
 {

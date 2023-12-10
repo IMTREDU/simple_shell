@@ -85,7 +85,7 @@ typedef struct BuiltinCommand
 int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
 char *_strcat(char *dest, char *src);
-char *starts_with_prefix(const char *haystack, const char *needle);
+char *starts_with(const char *haystack, const char *needle);
 char *_strcpy(char *dest, char *src);
 char *_strdup(char *str);
 void _puts(char *str);
@@ -93,32 +93,32 @@ int _putchar(char c);
 char *_strncpy(char *dest, char *src, int n);
 char *_strncat(char *dest, char *src, int n);
 char *_strchr(char *s, char c);
-char **splitStr(char *s, char *d);
-char **splitStr2(char *s, char *d);
+char **strtow(char *str, char *d);
+char **strtow2(char *str, char *d);
 
 /* ErrorStringFunctions */
 
-void customPrintString(char *inputStr);
-int customPrintCharToStderr(char character);
-int writeToFD(char character, int fileDescriptor);
-int printStringToFD(char *inputStr, int fileDescriptor);
+void _eputs(char *str);
+int _eputchar(char c);
+int _putfd(char c, int fd);
+int _putsfd(char *str, int fd);
 
 /* MemoryFunctions */
 char *_memset(char *s, char b, unsigned int n);
-void *reallocMemory(void *ptr, unsigned int oldSize, unsigned int newSize);
-void freeStringArray(char **stringArray);
-int freeAndNullify(void **pointer);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void ffree(char **pp);
+int bfree(void **ptr)
 
 /* path_operations.c */
-int isExecutableCommand(Commandinfo_t *info, char *path);
-char *duplicateCharsInRange(char *pathstr, int start, int stop);
-char *findCmdInPath(Commandinfo_t *info, char *pathstr, char *cmd);
+int is_cmd(Commandinfo_t *info, char *path);
+char *dup_chars(char *pathstr, int start, int stop);
+char *find_path(info_t *info, char *pathstr, char *cmd);
 
-/* ShellCommand.c */
-int executeShellCommand(Commandinfo_t *info, char **av);
-void searchBuiltins(Commandinfo_t *info);
-void searchCommand(Commandinfo_t *info);
-void forkAndExecute(Commandinfo_t *info);
+/* ShellCommand.c or hsh.c */
+int hsh(Commandinfo_t *info, char **av)
+int find_builtin(Commandinfo_t *info)
+void find_cmd(Commandinfo_t *info)
+void fork_cmd(Commandinfo_t *info)
 
 /* interactive_operations.c and error_handling.c */
 int exeInteractiveOperation(Commandinfo_t *info);
