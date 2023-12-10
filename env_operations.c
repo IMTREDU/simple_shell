@@ -21,7 +21,7 @@ int _myenv(Commandinfo_t *info)
  */
 char *_getenv(Commandinfo_t *info, const char *name)
 {
-	list_t *node = info->env;
+	ListNode_t *node = info->env;
 	char *p;
 
 	while (node)
@@ -82,7 +82,7 @@ int _myunsetenv(Commandinfo_t *info)
  */
 int populate_env_list(Commandinfo_t *info)
 {
-	list_t *node = NULL;
+	ListNode_t *node = NULL;
 	size_t i;
 
 	for (i = 0; environ[i]; i++)

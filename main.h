@@ -163,6 +163,30 @@ char **get_environ(Commandinfo_t *info);
 int _unsetenv(Commandinfo_t *info, char *var);
 int _setenv(Commandinfo_t *info, char *var, char *value);
 
+/* history_operations.c */
+char *get_history_file(Commandinfo_t *info);
+int write_history(Commandinfo_t *info);
+int read_history(Commandinfo_t *info);
+int build_history_list(Commandinfo_t *info, char *buf, int linecount);
+int renumber_history(Commandinfo_t *info);
 
+/* list_operations.c */
+ListNode_t *add_node(ListNode_t **head, const char *str, int num);
+ListNode_t *add_node_end(ListNode_t **head, const char *str, int num);
+size_t print_list_str(const ListNode_t *h);
+int delete_node_at_index(ListNode_t **head, unsigned int index);
+void free_list(ListNode_t **head_ptr);
+size_t list_len(const ListNode_t *h);
+char **list_to_strings(ListNode_t *head);
+size_t print_list(const ListNode_t *h);
+ListNode_t *node_starts_with(ListNode_t *node, char *prefix, char c);
+ssize_t get_node_index(ListNode_t *head, ListNode_t *node);
+
+/* command_processing.c */
+int is_chain(Commandinfo_t *info, char *buf, size_t *p);
+void check_chain(Commandinfo_t *info, char *buf, size_t *p, size_t i, size_t l);
+int replace_alias(Commandinfo_t *info);
+int replace_vars(Commandinfo_t *info);
+int replace_string(char **old, char *new);
 
 #endif /* MAIN_H */

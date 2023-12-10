@@ -26,7 +26,7 @@ char **get_environ(Commandinfo_t *info)
  */
 int _unsetenv(Commandinfo_t *info, char *var)
 {
-	list_t *node = info->env;
+	ListNode_t *node = info->env;
 	size_t i = 0;
 	char *p;
 
@@ -61,7 +61,7 @@ int _unsetenv(Commandinfo_t *info, char *var)
 int _setenv(Commandinfo_t *info, char *var, char *value)
 {
 	char *buf = NULL;
-	list_t *node;
+	ListNode_t *node;
 	char *p;
 
 	if (!var || !value)
