@@ -70,6 +70,10 @@ typedef struct CommandInfo
 	ListNode_t *history;
 } Commandinfo_t;
 
+#define EMPTY_COMMAND_INFO \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0, NULL, 0, 0, 0, \
+	NULL, NULL, NULL}
+
 /**
  * struct BuiltinCommand - Represents a built-in command with its related function
  * @type: The built-in command string identifier
