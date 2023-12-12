@@ -101,7 +101,6 @@ char **strtow(char *str, char *d);
 char **strtow2(char *str, char d);
 
 /* ErrorStringFunctions */
-
 void _eputs(char *str);
 int _eputchar(char c);
 int _putfd(char c, int fd);
