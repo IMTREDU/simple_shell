@@ -10,6 +10,20 @@ void clear_info(Commandinfo_t *info)
 	info->argv = NULL;
 	info->path = NULL;
 	info->argc = 0;
+	info->line_count = 0;
+	info->err_num = 0;
+	info->linecount_flag = 0;
+	info->fname = NULL;
+	info->environ = NULL;
+	info->env_changed = 0;
+	info->status = 0;
+	info->cmd_buf = NULL;
+	info->cmd_buf_type = 0;
+	info->readfd = 0;
+	info->histcount = 0;
+	info->env = NULL;
+	info->alias = NULL;
+	info->history = NULL;
 }
 
 /**
@@ -61,19 +75,23 @@ void free_info(Commandinfo_t *info, int all)
 	info->path = NULL;
 	if (all)
 	{
-		if (info->cmd_buf == NULL)
+		if (!info->cmd_buf)
 			free(info->arg);
 		if (info->env)
-			free_list(&(info->env));
+			free_list(&info->env);
 		if (info->history)
-			free_list(&(info->history));
+			free_list(&info->history);
 		if (info->alias)
-			free_list(&(info->alias));
+			free_list(&info->alias);
+
 		ffree(info->environ);
-			info->environ = NULL;
-		bfree((void **)info->cmd_buf);
+		info->environ = NULL;
+
+		bfree((void **)&info->cmd_buf);
+
 		if (info->readfd > 2)
 			close(info->readfd);
+
 		_putchar(-1);
 	}
 }
