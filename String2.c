@@ -23,25 +23,30 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _strdup - It is a function
- * @str: Variable from main
+ * _strdup - Duplicates a string
+ * @str: String to duplicate
  *
  * Return: Return deplicate
  */
 char *_strdup(const char *str)
 {
-	int length = 0;
-	char *ret;
-
 	if (str == NULL)
 		return (NULL);
-	while (*str++)
+
+	int length = 0;
+	const char *temp = str;
+
+	while (*temp++)
 		length++;
-	ret = malloc(sizeof(char) * (length + 1));
-	if (!ret)
+
+	char *ret = malloc(sizeof(char) * (length + 1));
+
+	if (ret == NULL)
 		return (NULL);
-	for (length++; length--;)
-		ret[length] = *--str;
+
+	for (int i = 0; i <= length; i++)
+		ret[i] = str[i];
+
 	return (ret);
 }
 
