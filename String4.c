@@ -12,11 +12,11 @@ char **strtow(char *str, char *d)
 	int i, j, k, m, numwords = 0;
 	char **s;
 
-	if (str == NULL || str[0] == 0)
+	if (!str || !str[0])
 		return (NULL);
 	if (!d)
 		d = " ";
-	for (i = 0; str[i] != '\0'; i++)
+	for (i = 0; str[i]; i++)
 		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
 			numwords++;
 
@@ -35,8 +35,8 @@ char **strtow(char *str, char *d)
 		s[j] = malloc((k + 1) * sizeof(char));
 		if (!s[j])
 		{
-			for (k = 0; k < j; k++)
-				free(s[k]);
+			while (j-- > 0)
+				free(s[j]);
 			free(s);
 			return (NULL);
 		}
