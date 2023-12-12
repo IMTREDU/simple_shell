@@ -66,10 +66,12 @@ char *_strncat(char *dest, char *src, int n)
  */
 char *_strchr(char *s, char c)
 {
-	do {
+	while (*s != '\0')
+	{
 		if (*s == c)
 			return (s);
-		} while (*s++ != '\0');
+		s++;
+	}
 
-	return (NULL);
+	return (*s == c ? s : NULL);
 }
