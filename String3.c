@@ -59,9 +59,9 @@ char *_strncat(char *dest, char *src, int n)
 }
 
 /**
- **_strchr - It is a function
- *@s: Variable from main
- *@c: Variable from main
+ **_strchr - Locates a character in a string
+ *@s: String to search
+ *@c: Character to locate
  *Return: Return S/Null
  */
 char *_strchr(char *s, char c)
@@ -69,7 +69,7 @@ char *_strchr(char *s, char c)
 	do {
 		if (*s == c)
 			return (s);
-	} while (*s++ != '\0');
+		} while (*s++ != '\0');
 
 	return (NULL);
 }
