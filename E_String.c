@@ -12,10 +12,10 @@ void _eputs(char *str)
 
 	if (!str)
 		return;
-	while (str[i] != '\0')
+
+	for (i = 0; str[i]; i++)
 	{
 		_eputchar(str[i]);
-		i++;
 	}
 }
 
@@ -47,7 +47,7 @@ int _eputchar(char c)
  * @fd: The file descriptor to write to.
  *
  * Return: On success 1.
- * 
+ *
  */
 int _putfd(char c, int fd)
 {
@@ -64,6 +64,7 @@ int _putfd(char c, int fd)
 	return (1);
 }
 
+
 /**
  *_putsfd - Prints an input string to the specified file descriptor.
  * @str: The string to be printed.
@@ -73,13 +74,13 @@ int _putfd(char c, int fd)
  */
 int _putsfd(char *str, int fd)
 {
-	int i = 0;
+	int count = 0;
 
 	if (!str)
 		return (0);
 	while (*str)
 	{
-		i += _putfd(*str++, fd);
+		count += _putfd(*str++, fd);
 	}
-	return (i);
+	return (count);
 }
