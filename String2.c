@@ -30,21 +30,23 @@ char *_strcpy(char *dest, char *src)
  */
 char *_strdup(const char *str)
 {
+	int length = 0;
+	int i;
+	const char *temp = str;
+	char *ret;
+
 	if (str == NULL)
 		return (NULL);
-
-	int length = 0;
-	const char *temp = str;
 
 	while (*temp++)
 		length++;
 
-	char *ret = malloc(sizeof(char) * (length + 1));
+	ret = malloc(sizeof(char) * (length + 1));
 
 	if (ret == NULL)
 		return (NULL);
 
-	for (int i = 0; i <= length; i++)
+	for (i = 0; i <= length; i++)
 		ret[i] = str[i];
 
 	return (ret);
