@@ -11,7 +11,7 @@ int _myexit(Commandinfo_t *info)
 {
 	int exitcheck;
 
-	if (info->argv[1])  /* If there is an exit arguement */
+	if (info->argv[1])
 	{
 		exitcheck = _erratoi(info->argv[1]);
 		if (exitcheck == -1)
@@ -29,6 +29,7 @@ int _myexit(Commandinfo_t *info)
 	return (-2);
 }
 
+
 /**
  * _mycd - Changes the current directory of the process.
  * @info: Structure with potential arguments
@@ -37,31 +38,28 @@ int _myexit(Commandinfo_t *info)
  */
 int _mycd(Commandinfo_t *info)
 {
-	char *s, *dir, buffer[1024];
+	char *dir, buffer[1024];
 	int chdir_ret;
 
-	s = getcwd(buffer, 1024);
-	if (!s)
+	if (!(getcwd(buffer, 1024)))
 		_puts("Error: Unable to retrieve current working directory.\n");
 	if (!info->argv[1])
 	{
-		dir = _getenv(info, "HOME=");
-		if (!dir)
-			chdir_ret = chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
-		else
-			chdir_ret = chdir(dir);
+		dir = _getenv(info, "HOME=") ? : _getenv(info, "PWD=");
+		chdir_ret = chdir(dir ? dir : "/");
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
 	{
-		if (!_getenv(info, "OLDPWD="))
+		dir = _getenv(info, "OLDPWD=");
+		if (!dir)
 		{
-			_puts(s);
+			_puts(getcwd(buffer, sizeof(buffer)));
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD="));
+		_puts(dir);
 		_putchar('\n');
-		chdir_ret = chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
+		chdir_ret = chdir(dir);
 	}
 	else
 		chdir_ret = chdir(info->argv[1]);
