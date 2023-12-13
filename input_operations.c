@@ -157,6 +157,7 @@ int _getline(Commandinfo_t *info, char **ptr, size_t *length)
  */
 void sigintHandler(__attribute__((unused))int sig_num)
 {
-	_puts("\n$ ");
+	_puts("\n");
+	_puts("$ ");
 	_putchar(-1);
 }
