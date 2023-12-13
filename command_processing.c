@@ -34,7 +34,7 @@ int is_chain(Commandinfo_t *info, char *buf, size_t *p)
 
 /**
  * check_chain - Checks whether to continue chaining based on the last status.
- * @info: The parameter structure
+ * @inf: The parameter structure
  * @buf: The character buffer
  * @p: Address of the current position in buf
  * @i: Starting position in buf
@@ -42,12 +42,12 @@ int is_chain(Commandinfo_t *info, char *buf, size_t *p)
  *
  * Return: Void.
  */
-void check_chain(Commandinfo_t *info, char *buf, size_t *p, size_t i, size_t l)
+void check_chain(Commandinfo_t *inf, char *buf, size_t *p, size_t i, size_t l)
 {
 	size_t j = *p;
 
-	if ((info->cmd_buf_type == 2 && info->status) ||
-			(info->cmd_buf_type == 1 && !info->status))
+	if ((inf->cmd_buf_type == 2 && inf->status) ||
+			(inf->cmd_buf_type == 1 && !inf->status))
 	{
 		buf[i] = 0;
 		j = l;

@@ -75,7 +75,7 @@ typedef struct CommandInfo
 	NULL, NULL, NULL}
 
 /**
- * struct BuiltinCommand - Represents a built-in command with its related function
+ * struct BuiltinCommand - Represents a built-in command with its related func
  * @type: The built-in command string identifier
  * @func: Pointer to the associated function for the built-in command
  */
@@ -108,7 +108,7 @@ int _putsfd(char *str, int fd);
 
 /* MemoryFunctions */
 char *_memset(char *s, char b, unsigned int n);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size); 
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void ffree(char **pp);
 int bfree(void **ptr);
 
@@ -127,7 +127,7 @@ void fork_cmd(Commandinfo_t *info);
 int interactive(Commandinfo_t *info);
 int is_delim(char c, char *delim);
 int _isalpha(int c);
-int _atoi(char * s);
+int _atoi(char *s);
 int _erratoi(char *s);
 void print_error(Commandinfo_t *, char *estr);
 int print_d(int input, int fd);
@@ -187,7 +187,7 @@ ssize_t get_node_index(ListNode_t *head, ListNode_t *node);
 
 /* command_processing.c */
 int is_chain(Commandinfo_t *info, char *buf, size_t *p);
-void check_chain(Commandinfo_t *info, char *buf, size_t *p, size_t i, size_t l);
+void check_chain(Commandinfo_t *inf, char *buf, size_t *p, size_t i, size_t l);
 int replace_alias(Commandinfo_t *info);
 int replace_vars(Commandinfo_t *info);
 int replace_string(char **old, char *new);
