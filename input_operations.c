@@ -18,8 +18,8 @@ ssize_t input_buf(Commandinfo_t *info, char **buf, size_t *len)
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
-		r = getline(buf, &len_p, stdin);
 		r = _getline(info, buf, &len_p);
+
 		if (r > 0)
 		{
 			if ((*buf)[r - 1] == '\n')
@@ -30,10 +30,8 @@ ssize_t input_buf(Commandinfo_t *info, char **buf, size_t *len)
 			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
-			{
-				*len = r;
-				info->cmd_buf = buf;
-			}
+			*len = r;
+			info->cmd_buf = buf;
 		}
 	}
 	return (r);
@@ -159,7 +157,6 @@ int _getline(Commandinfo_t *info, char **ptr, size_t *length)
  */
 void sigintHandler(__attribute__((unused))int sig_num)
 {
-	_puts("\n");
-	_puts("$ ");
+	_puts("\n$ ");
 	_putchar(-1);
 }
