@@ -195,7 +195,4 @@ int replace_alias(Commandinfo_t *info);
 int replace_vars(Commandinfo_t *info);
 int replace_string(char **old, char *new);
 
-/* Main.c */
-void handle_open_error(char **av);
-
 #endif /* MAIN_H */
