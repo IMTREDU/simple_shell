@@ -95,20 +95,12 @@ int print_d(int input, int fd)
  */
 char *convert_number(long int num, int base, int flags)
 {
-	static char *array;
 	static char buffer[50];
+	char *array = (flags & 1) ? "0123456789abcdef" : "0123456789ABCDEF";
+	char *ptr = &buffer[49];
 	char sign = 0;
-	char *ptr;
-	unsigned long n = num;
+	unsigned long n = (num < 0 && !(flags & 2)) ? (sign = '-', -num) : num;
 
-	if (!(flags & 2) && num < 0)
-	{
-		n = -num;
-		sign = '-';
-
-	}
-	array = flags & 1 ? "0123456789abcdef" : "0123456789ABCDEF";
-	ptr = &buffer[49];
 	*ptr = '\0';
 
 	do	{
