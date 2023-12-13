@@ -45,7 +45,9 @@ int _mycd(Commandinfo_t *info)
 		_puts("Error: Unable to retrieve current working directory.\n");
 	if (!info->argv[1])
 	{
-		dir = _getenv(info, "HOME=") ? : _getenv(info, "PWD=");
+		dir = _getenv(info, "HOME=") ?
+			_getenv(info, "HOME=") :
+			_getenv(info, "PWD=");
 		chdir_ret = chdir(dir ? dir : "/");
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
