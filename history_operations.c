@@ -10,15 +10,17 @@
 
 char *get_history_file(Commandinfo_t *info)
 {
-	char *buf, *dir;
+	char *buf = NULL;
+	char *dir = _getenv(info, "HOME=");
+	size_t buf_size;
 
-	dir = _getenv(info, "HOME=");
 	if (!dir)
 		return (NULL);
-	buf = malloc(sizeof(char) * (_strlen(dir) + _strlen(HistoryFile) + 2));
+
+	buf_size = _strlen(dir) + _strlen(HistoryFile) + 2;
+	buf = malloc(buf_size);
 	if (!buf)
 		return (NULL);
-	buf[0] = 0;
 	_strcpy(buf, dir);
 	_strcat(buf, "/");
 	_strcat(buf, HistoryFile);
@@ -49,7 +51,11 @@ int write_history(Commandinfo_t *info)
 		_putsfd(node->str, fd);
 		_putfd('\n', fd);
 	}
-	_putfd(-1, fd);
+	if (_putfd(-1, fd) == -1)
+	{
+		close(fd);
+		return (-1);
+	}
 	close(fd);
 	return (1);
 }
@@ -113,14 +119,10 @@ int read_history(Commandinfo_t *info)
  */
 int build_history_list(Commandinfo_t *info, char *buf, int linecount)
 {
-	ListNode_t *node = NULL;
+	ListNode_t *node = info->history ? info->history : NULL;
 
-	if (info->history)
-		node = info->history;
 	add_node_end(&node, buf, linecount);
-
-	if (!info->history)
-		info->history = node;
+	info->history = node;
 	return (0);
 }
 
@@ -133,12 +135,12 @@ int build_history_list(Commandinfo_t *info, char *buf, int linecount)
 int renumber_history(Commandinfo_t *info)
 {
 	ListNode_t *node = info->history;
-	int i = 0;
+	int count = 0;
 
 	while (node)
 	{
-		node->num = i++;
+		node->num = count++;
 		node = node->next;
 	}
-	return (info->histcount = i);
+	return (info->histcount = count);
 }
