@@ -28,23 +28,22 @@ int _unsetenv(Commandinfo_t *info, char *var)
 {
 	ListNode_t *node = info->env;
 	size_t i = 0;
-	char *p;
 
 	if (!node || !var)
 		return (0);
-
 	while (node)
 	{
-		p = starts_with(node->str, var);
-		if (p && *p == '=')
+		if (starts_with(node->str, var) && node->str[strlen(var)] == '=')
 		{
 			info->env_changed = delete_node_at_index(&(info->env), i);
 			i = 0;
 			node = info->env;
-			continue;
 		}
-		node = node->next;
-		i++;
+		else
+		{
+			node = node->next;
+			i++;
+		}
 	}
 	return (info->env_changed);
 }
@@ -60,21 +59,18 @@ int _unsetenv(Commandinfo_t *info, char *var)
  */
 int _setenv(Commandinfo_t *info, char *var, char *value)
 {
-	char *buf = NULL;
 	ListNode_t *node;
-	char *p;
+	char *buf, *p;
 
 	if (!var || !value)
 		return (0);
-
 	buf = malloc(_strlen(var) + _strlen(value) + 2);
 	if (!buf)
 		return (1);
 	_strcpy(buf, var);
 	_strcat(buf, "=");
 	_strcat(buf, value);
-	node = info->env;
-	while (node)
+	for (node = info->env; node; node = node->next)
 	{
 		p = starts_with(node->str, var);
 		if (p && *p == '=')
@@ -82,12 +78,10 @@ int _setenv(Commandinfo_t *info, char *var, char *value)
 			free(node->str);
 			node->str = buf;
 			info->env_changed = 1;
-			return (0);
+			return (free(buf), 0);
 		}
-		node = node->next;
 	}
 	add_node_end(&(info->env), buf, 0);
-	free(buf);
 	info->env_changed = 1;
 	return (0);
 }

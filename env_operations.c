@@ -45,7 +45,7 @@ int _mysetenv(Commandinfo_t *info)
 {
 	if (info->argc != 3)
 	{
-		_eputs("Number of arguements are incorrect\n");
+		_eputs("Number of arguements is incorrect\n");
 		return (1);
 	}
 	if (_setenv(info, info->argv[1], info->argv[2]))
@@ -65,7 +65,7 @@ int _myunsetenv(Commandinfo_t *info)
 
 	if (info->argc == 1)
 	{
-		_eputs("Few arguements.\n");
+		_eputs("Too few arguments.\n");
 		return (1);
 	}
 	for (i = 1; i <= info->argc; i++)
@@ -86,7 +86,8 @@ int populate_env_list(Commandinfo_t *info)
 	size_t i;
 
 	for (i = 0; environ[i]; i++)
-		add_node_end(&node, environ[i], 0);
+		if (add_node_end(&node, environ[i], 0) != 0)
+			return (1);
 	info->env = node;
 	return (0);
 }
