@@ -10,20 +10,6 @@ void clear_info(Commandinfo_t *info)
 	info->argv = NULL;
 	info->path = NULL;
 	info->argc = 0;
-	info->line_count = 0;
-	info->err_num = 0;
-	info->linecount_flag = 0;
-	info->fname = NULL;
-	info->environ = NULL;
-	info->env_changed = 0;
-	info->status = 0;
-	info->cmd_buf = NULL;
-	info->cmd_buf_type = 0;
-	info->readfd = 0;
-	info->histcount = 0;
-	info->env = NULL;
-	info->alias = NULL;
-	info->history = NULL;
 }
 
 /**

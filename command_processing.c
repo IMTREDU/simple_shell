@@ -12,22 +12,25 @@ int is_chain(Commandinfo_t *info, char *buf, size_t *p)
 {
 	size_t j = *p;
 
-	if ((buf[j] == '|' && buf[j + 1] == '|') ||
-			(buf[j] == '&' && buf[j + 1] == '&'))
+	if (buf[j] == '|' && buf[j + 1] == '|')
 	{
 		buf[j] = 0;
 		j++;
-		info->cmd_buf_type = (buf[j - 1] == '|') ? 1 : 2;
+		info->cmd_buf_type = 1;
+	}
+	else if (buf[j] == '&' && buf[j + 1] == '&')
+	{
+		buf[j] = 0;
+		j++;
+		info->cmd_buf_type = 2;
 	}
 	else if (buf[j] == ';')
 	{
 		buf[j] = 0;
 		info->cmd_buf_type = 3;
-		j++;
 	}
 	else
 		return (0);
-
 	*p = j;
 	return (1);
 }
@@ -46,11 +49,21 @@ void check_chain(Commandinfo_t *inf, char *buf, size_t *p, size_t i, size_t l)
 {
 	size_t j = *p;
 
-	if ((inf->cmd_buf_type == 2 && inf->status) ||
-			(inf->cmd_buf_type == 1 && !inf->status))
+	if (inf->cmd_buf_type == 2)
 	{
-		buf[i] = 0;
-		j = l;
+		if (inf->status)
+		{
+			buf[i] = 0;
+			j = l;
+		}
+	}
+	if (inf->cmd_buf_type == 1)
+	{
+		if (!inf->status)
+		{
+			buf[i] = 0;
+			j = l;
+		}
 	}
 
 	*p = j;
@@ -100,29 +113,28 @@ int replace_vars(Commandinfo_t *info)
 	{
 		if (info->argv[i][0] != '$' || !info->argv[i][1])
 			continue;
+
 		if (!_strcmp(info->argv[i], "$?"))
 		{
 			replace_string(&(info->argv[i]),
-					_strdup(convert_number(info->status, 10, 0)));
+				_strdup(convert_number(info->status, 10, 0)));
+			continue;
 		}
-		else if (!_strcmp(info->argv[i], "$$"))
+		if (!_strcmp(info->argv[i], "$$"))
 		{
 			replace_string(&(info->argv[i]),
-					_strdup(convert_number(getpid(), 10, 0)));
+				_strdup(convert_number(getpid(), 10, 0)));
+			continue;
 		}
-		else
+		node = node_starts_with(info->env, &info->argv[i][1], '=');
+		if (node)
 		{
-			node = node_starts_with(info->env, &info->argv[i][1], '=');
-			if (node)
-			{
-				replace_string(&(info->argv[i]),
-						_strdup(_strchr(node->str, '=') + 1));
-			}
-			else
-			{
-				replace_string(&info->argv[i], _strdup(""));
-			}
+			replace_string(&(info->argv[i]),
+				_strdup(_strchr(node->str, '=') + 1));
+			continue;
 		}
+		replace_string(&info->argv[i], _strdup(""));
+
 	}
 	return (0);
 }

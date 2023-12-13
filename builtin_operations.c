@@ -38,30 +38,31 @@ int _myexit(Commandinfo_t *info)
  */
 int _mycd(Commandinfo_t *info)
 {
-	char *dir, buffer[1024];
+	char *s, *dir, buffer[1024];
 	int chdir_ret;
 
-	if (!(getcwd(buffer, 1024)))
+	s = getcwd(buffer, 1024);
+	if (!s)
 		_puts("Error: Unable to retrieve current working directory.\n");
 	if (!info->argv[1])
 	{
-		dir = _getenv(info, "HOME=") ?
-			_getenv(info, "HOME=") :
-			_getenv(info, "PWD=");
-		chdir_ret = chdir(dir ? dir : "/");
+		dir = _getenv(info, "HOME=");
+		if (!dir)
+			chdir_ret = chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+		else
+			chdir_ret = chdir(dir);
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
 	{
-		dir = _getenv(info, "OLDPWD=");
-		if (!dir)
+		if (!_getenv(info, "OLDPWD="))
 		{
-			_puts(getcwd(buffer, sizeof(buffer)));
+			_puts(s);
 			_putchar('\n');
 			return (1);
 		}
-		_puts(dir);
+		_puts(_getenv(info, "OLDPWD="));
 		_putchar('\n');
-		chdir_ret = chdir(dir);
+		chdir_ret = chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
 		chdir_ret = chdir(info->argv[1]);

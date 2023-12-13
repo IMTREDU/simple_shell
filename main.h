@@ -112,6 +112,9 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void ffree(char **pp);
 int bfree(void **ptr);
 
+/* loophsh.c */
+int loophsh(char **);
+
 /* path_operations.c */
 int is_cmd(Commandinfo_t *info, char *path);
 char *dup_chars(char *pathstr, int start, int stop);

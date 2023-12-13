@@ -34,11 +34,15 @@ int hsh(Commandinfo_t *info, char **av)
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
-	if (builtin_ret == -2 && (exit(info->err_num), 1))
+	if (builtin_ret == -2)
+	{
+		if (info->err_num == -1)
+			exit(info->status);
 		exit(info->err_num);
-
+	}
 	return (builtin_ret);
 }
+
 
 /**
  * find_builtin - Locates a built-in command
@@ -91,29 +95,31 @@ void find_cmd(Commandinfo_t *info)
 		info->line_count++;
 		info->linecount_flag = 0;
 	}
-
-	for (i = 0, k = 0; info->arg[i] && !is_delim(info->arg[i], " \t\n"); i++)
-		k++;
+	for (i = 0, k = 0; info->arg[i]; i++)
+		if (!is_delim(info->arg[i], " \t\n"))
+			k++;
 	if (!k)
 		return;
+
 	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
 		fork_cmd(info);
 	}
-	else if ((interactive(info) || _getenv(info, "PATH=")
-				|| info->argv[0][0] == '/')
-			&& is_cmd(info, info->argv[0]))
+	else
 	{
-		fork_cmd(info);
-	}
-	else if (*(info->arg) != '\n')
-	{
-		info->status = 127;
-		print_error(info, "not found\n");
+		if ((interactive(info) || _getenv(info, "PATH=")
+			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
+			fork_cmd(info);
+		else if (*(info->arg) != '\n')
+		{
+			info->status = 127;
+			print_error(info, "not found\n");
+		}
 	}
 }
+
 /**
  * fork_cmd - Forks and executes a command
  * @info: Parameter and return info struct

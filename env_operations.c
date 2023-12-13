@@ -86,8 +86,7 @@ int populate_env_list(Commandinfo_t *info)
 	size_t i;
 
 	for (i = 0; environ[i]; i++)
-		if (add_node_end(&node, environ[i], 0) != 0)
-			return (1);
+		add_node_end(&node, environ[i], 0);
 	info->env = node;
 	return (0);
 }
