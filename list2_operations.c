@@ -8,14 +8,14 @@
  */
 size_t list_len(const ListNode_t *h)
 {
-	size_t i = 0;
+	size_t count = 0;
 
 	while (h)
 	{
 		h = h->next;
-		i++;
+		count++;
 	}
-	return (i);
+	return (count);
 }
 
 /**
@@ -63,7 +63,7 @@ char **list_to_strings(ListNode_t *head)
  */
 size_t print_list(const ListNode_t *h)
 {
-	size_t i = 0;
+	size_t count = 0;
 
 	while (h)
 	{
@@ -73,9 +73,9 @@ size_t print_list(const ListNode_t *h)
 		_puts(h->str ? h->str : "(nil)");
 		_puts("\n");
 		h = h->next;
-		i++;
+		count++;
 	}
-	return (i);
+	return (count);
 }
 
 /**
