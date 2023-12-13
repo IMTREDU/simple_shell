@@ -31,24 +31,17 @@ char *_strcpy(char *dest, char *src)
 char *_strdup(const char *str)
 {
 	int length = 0;
-	int i;
-	const char *temp = str;
 	char *ret;
 
 	if (str == NULL)
 		return (NULL);
-
-	while (*temp++)
+	while (*str++)
 		length++;
-
 	ret = malloc(sizeof(char) * (length + 1));
-
-	if (ret == NULL)
+	if (!ret)
 		return (NULL);
-
-	for (i = 0; i <= length; i++)
-		ret[i] = str[i];
-
+	for (length++; length--;)
+		ret[length] = *--str;
 	return (ret);
 }
 

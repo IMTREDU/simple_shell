@@ -112,37 +112,33 @@ ssize_t read_buf(Commandinfo_t *info, char *buf, size_t *i)
  */
 int _getline(Commandinfo_t *info, char **ptr, size_t *length)
 {
-	static char buf[1024];
 	static size_t i, len;
-	size_t k;
 	ssize_t r = 0, s = 0;
-	char *p = NULL, *new_p = NULL, *c;
+	char *p = NULL, *c;
+	size_t k;
+	char *new_p;
+	char buf[1024];
 
 	p = *ptr;
 	if (p && length)
 		s = *length;
 	if (i == len)
 		i = len = 0;
-
 	r = read_buf(info, buf, &len);
 	if (r == -1 || (r == 0 && len == 0))
 		return (-1);
-
 	c = _strchr(buf + i, '\n');
 	k = c ? 1 + (unsigned int)(c - buf) : len;
-	new_p = _realloc(p, s, s ? s + k : k + 1);
+	new_p = malloc(s ? s + k : k + 1);
 	if (!new_p)
 		return (p ? free(p), -1 : -1);
-
 	if (s)
 		_strncat(new_p, buf + i, k - i);
 	else
 		_strncpy(new_p, buf + i, k - i + 1);
-
 	s += k - i;
 	i = k;
 	p = new_p;
-
 	if (length)
 		*length = s;
 	*ptr = p;
