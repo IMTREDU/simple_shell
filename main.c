@@ -23,7 +23,7 @@ int main(int ac, char **av)
 		if (fd == -1)
 		{
 			handle_open_error(av);
-			return EXIT_FAILURE;
+			return (EXIT_FAILURE);
 		}
 		info->readfd = fd;
 	}
