@@ -129,7 +129,7 @@ int _getline(Commandinfo_t *info, char **ptr, size_t *length)
         return (-1);
     c = _strchr(buf + i, '\n');
     k = c ? 1 + (unsigned int)(c - buf) : len;
-    new_p = malloc(s ? s + k : k + 1);
+    new_p = malloc((s ? s + k : k) + 1);
     if (!new_p) {
         if (p)
             free(p);
