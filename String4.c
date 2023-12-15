@@ -12,11 +12,11 @@ char **strtow(char *str, char *d)
 	int i, j, k, m, numwords = 0;
 	char **s;
 
-	if (!str || !str[0])
+	if (str == NULL || str[0] == 0)
 		return (NULL);
 	if (!d)
 		d = " ";
-	for (i = 0; str[i]; i++)
+	for (i = 0; str[i] != '\0'; i++)
 		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
 			numwords++;
 
@@ -35,8 +35,8 @@ char **strtow(char *str, char *d)
 		s[j] = malloc((k + 1) * sizeof(char));
 		if (!s[j])
 		{
-			while (j-- > 0)
-				free(s[j]);
+			for (k = 0; k < j; k++)
+				free(s[k]);
 			free(s);
 			return (NULL);
 		}
@@ -47,6 +47,7 @@ char **strtow(char *str, char *d)
 	s[j] = NULL;
 	return (s);
 }
+
 
 /**
  * **strtow2 - Splits a string into words
@@ -59,11 +60,11 @@ char **strtow2(char *str, char d)
 	int i, j, k, m, numwords = 0;
 	char **s;
 
-	if (!str || !str[0])
+	if (str == NULL || str[0] == 0)
 		return (NULL);
-	for (i = 0; str[i]; i++)
+	for (i = 0; str[i] != '\0'; i++)
 		if ((str[i] != d && str[i + 1] == d) ||
-				(str[i] != d && !str[i + 1]) || str[i + 1] == d)
+		    (str[i] != d && !str[i + 1]) || str[i + 1] == d)
 			numwords++;
 	if (numwords == 0)
 		return (NULL);
@@ -72,7 +73,7 @@ char **strtow2(char *str, char d)
 		return (NULL);
 	for (i = 0, j = 0; j < numwords; j++)
 	{
-		while (str[i] == d && str[i])
+		while (str[i] == d && str[i] != d)
 			i++;
 		k = 0;
 		while (str[i + k] != d && str[i + k] && str[i + k] != d)
@@ -80,8 +81,8 @@ char **strtow2(char *str, char d)
 		s[j] = malloc((k + 1) * sizeof(char));
 		if (!s[j])
 		{
-			while (j-- > 0)
-				free(s[j]);
+			for (k = 0; k < j; k++)
+				free(s[k]);
 			free(s);
 			return (NULL);
 		}
