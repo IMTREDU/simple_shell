@@ -1,15 +1,15 @@
-#include "main.h"
+#include "shell.h"
 
 /**
- * main - Main function for the shell.
- * @ac: Argument count.
- * @av: Argument vector.
+ * main - entry point
+ * @ac: arg count
+ * @av: arg vector
  *
- * Return: Returns 0 on success, 1 on error.
+ * Return: 0 on success, 1 on error
  */
 int main(int ac, char **av)
 {
-	Commandinfo_t info[] = { EMPTY_COMMAND_INFO };
+	info_t info[] = { INFO_INIT };
 	int fd = 2;
 
 	asm ("mov %1, %0\n\t"
@@ -30,7 +30,7 @@ int main(int ac, char **av)
 				_eputs(": 0: Can't open ");
 				_eputs(av[1]);
 				_eputchar('\n');
-				_eputchar(-1);
+				_eputchar(BUF_FLUSH);
 				exit(127);
 			}
 			return (EXIT_FAILURE);

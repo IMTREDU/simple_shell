@@ -1,12 +1,12 @@
-#include "main.h"
+#include "shell.h"
 
 /**
- * get_environ - Provides a copy of the string array
- * @info: Structure with potential arguments
- *
- * Return: Always returns 0
+ * get_environ - returns the string array copy of our environ
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ * Return: Always 0
  */
-char **get_environ(Commandinfo_t *info)
+char **get_environ(info_t *info)
 {
 	if (!info->environ || info->env_changed)
 	{
@@ -18,15 +18,15 @@ char **get_environ(Commandinfo_t *info)
 }
 
 /**
- * _unsetenv - Removes a specified environment variable
- * @info: Structure containing potential arguments
- *
- * @var: The string property of the environment variable.
- * Return: 1 on successful deletion, 0 otherwise.
+ * _unsetenv - Remove an environment variable
+ * @info: Structure containing potential arguments. Used to maintain
+ *        constant function prototype.
+ *  Return: 1 on delete, 0 otherwise
+ * @var: the string env var property
  */
-int _unsetenv(Commandinfo_t *info, char *var)
+int _unsetenv(info_t *info, char *var)
 {
-	ListNode_t *node = info->env;
+	list_t *node = info->env;
 	size_t i = 0;
 	char *p;
 
@@ -50,18 +50,18 @@ int _unsetenv(Commandinfo_t *info, char *var)
 }
 
 /**
- * _setenv - Initializes a new environment var or modifies an existing one
- *
- * @info: Structure containing potential arguments
- *
- * @var: The string property of the environment variable.
- * @value: The string value of the environment variable.
- *  Return: Always returns 0.
+ * _setenv - Initialize a new environment variable,
+ *             or modify an existing one
+ * @info: Structure containing potential arguments. Used to maintain
+ *        constant function prototype.
+ * @var: the string env var property
+ * @value: the string env var value
+ *  Return: Always 0
  */
-int _setenv(Commandinfo_t *info, char *var, char *value)
+int _setenv(info_t *info, char *var, char *value)
 {
 	char *buf = NULL;
-	ListNode_t *node;
+	list_t *node;
 	char *p;
 
 	if (!var || !value)
@@ -91,4 +91,3 @@ int _setenv(Commandinfo_t *info, char *var, char *value)
 	info->env_changed = 1;
 	return (0);
 }
-

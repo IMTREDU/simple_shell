@@ -1,11 +1,11 @@
-#include "main.h"
+#include "shell.h"
 
 /**
- * _strcpy - It is a function
- * @dest: Variable from main
- * @src: Variable from main
+ * _strcpy - copies a string
+ * @dest: the destination
+ * @src: the source
  *
- * Return: Return dest
+ * Return: pointer to destination
  */
 char *_strcpy(char *dest, char *src)
 {
@@ -23,10 +23,10 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _strdup - Duplicates a string
- * @str: String to duplicate
+ * _strdup - duplicates a string
+ * @str: the string to duplicate
  *
- * Return: Return deplicate
+ * Return: pointer to the duplicated string
  */
 char *_strdup(const char *str)
 {
@@ -46,10 +46,10 @@ char *_strdup(const char *str)
 }
 
 /**
- *_puts - It is a function
- *@str: Variable from main
+ *_puts - prints an input string
+ *@str: the string to be printed
  *
- * Return: Void
+ * Return: Nothing
  */
 void _puts(char *str)
 {
@@ -65,23 +65,23 @@ void _puts(char *str)
 }
 
 /**
- * _putchar - prints the character 'c' to the standard output (stdout)
- * @c: The character to be printed
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
  *
  * Return: On success 1.
- *
+ * On error, -1 is returned, and errno is set appropriately.
  */
 int _putchar(char c)
 {
 	static int i;
-	static char buf[1024];
+	static char buf[WRITE_BUF_SIZE];
 
-	if (c == -1 || i >= 1024)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
 		write(1, buf, i);
 		i = 0;
 	}
-	if (c != -1)
+	if (c != BUF_FLUSH)
 		buf[i++] = c;
 	return (1);
 }
