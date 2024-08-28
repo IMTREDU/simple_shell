@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * _strcpy - copies a string
- * @dest: the destination
- * @src: the source
+ * _strcpy - copies string
+ * @dest: destination
+ * @src: source
  *
  * Return: pointer to destination
  */
@@ -23,10 +23,10 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _strdup - duplicates a string
- * @str: the string to duplicate
+ * _strdup - duplicates string
+ * @str: string to duplicate
  *
- * Return: pointer to the duplicated string
+ * Return: pointer to duplicated string
  */
 char *_strdup(const char *str)
 {
@@ -46,8 +46,8 @@ char *_strdup(const char *str)
 }
 
 /**
- *_puts - prints an input string
- *@str: the string to be printed
+ *_puts - prints input string
+ *@str: string to be printed
  *
  * Return: Nothing
  */
@@ -65,11 +65,11 @@ void _puts(char *str)
 }
 
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
+ * _putchar - writes char c to stdout
+ * @c: character to print
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: success 1
+ * On error, -1 is returned, and errno is set appropriately
  */
 int _putchar(char c)
 {
